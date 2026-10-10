@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#121212">
+  <title>دانلود مستقیم اپلیکیشن اندروید بام - بانک ملی ایران</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 40px;
+      overflow-x: hidden;
+    }
+
+    /* Alert Banner */
+    .alert-banner {
+      background: linear-gradient(135deg, #d32f2f, #ef5350);
+      color: #ffffff;
+      padding: 14px 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.8;
+      box-shadow: 0 4px 20px rgba(239, 83, 80, 0.35);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .alert-icon {
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+
+    /* Main Container */
+    .container {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .title {
+      font-size: 38px;
+      font-weight: 900;
+      color: #ffa726;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      text-shadow: 0 4px 24px rgba(255, 167, 38, 0.25);
+    }
+
+    .subtitle {
+      font-size: 18px;
+      font-weight: 600;
+      color: #b0bec5;
+      margin-bottom: 16px;
+    }
+
+    .subtext {
+      font-size: 15px;
+      color: #cfd8dc;
+      line-height: 2.2;
+      margin-bottom: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 16px 20px;
+      border-radius: 16px;
+      width: 100%;
+    }
+
+    .subtext .highlight {
+      color: #ffa726;
+      font-weight: 700;
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* Direct Download Button */
+    .btn-download-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 320px;
+      background: linear-gradient(135deg, #ffa726, #ff9800);
+      color: #121212;
+      text-decoration: none;
+      padding: 16px 28px;
+      border-radius: 50px;
+      font-size: 17px;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(255, 152, 0, 0.35);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-download-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(255, 152, 0, 0.45);
+      background: linear-gradient(135deg, #ffb74d, #ffa726);
+    }
+
+    .btn-download-primary:active {
+      transform: translateY(1px);
+    }
+
+    .btn-download-primary svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* Download Toast / Status */
+    .download-status {
+      display: none;
+      margin-top: 16px;
+      padding: 12px 20px;
+      background: rgba(76, 175, 80, 0.15);
+      border: 1px solid rgba(76, 175, 80, 0.4);
+      color: #81c784;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      align-items: center;
+      gap: 10px;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .download-status.show {
+      display: inline-flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Phone Image */
+    .app-img-container {
+      margin: 36px 0 24px;
+      position: relative;
+    }
+
+    .app-img {
+      width: 230px;
+      max-width: 85%;
+      height: auto;
+      filter: drop-shadow(0 16px 36px rgba(255, 167, 38, 0.2));
+      transition: transform 0.4s ease;
+    }
+
+    .app-img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Alternative Stores Section */
+    .stores-title {
+      font-size: 14px;
+      color: #90a4ae;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .store-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background-color: #1e1e1e;
+      color: #ffffff;
+      padding: 14px 20px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .store-btn:hover {
+      background-color: #2a2a2a;
+      border-color: rgba(255, 167, 38, 0.4);
+      transform: translateY(-2px);
+      color: #ffa726;
+    }
+
+    .store-btn:active {
+      transform: translateY(0);
+    }
+
+    .store-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* Security Note Footer */
+    .security-badge {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #78909c;
+    }
+
+    .security-badge svg {
+      width: 16px;
+      height: 16px;
+      fill: #4caf50;
+    }
+
+    @media screen and (max-width: 480px) {
+      body {
+        padding: 0 12px 32px;
+      }
+      .alert-banner {
+        font-size: 12px;
+        padding: 10px 14px;
+      }
+      .container {
+        margin-top: 24px;
+      }
+      .title {
+        font-size: 28px;
+      }
+      .subtitle {
+        font-size: 16px;
+      }
+      .subtext {
+        font-size: 13.5px;
+        line-height: 2;
+        padding: 14px 16px;
+      }
+      .btn-download-primary {
+        font-size: 15.5px;
+        padding: 14px 24px;
+      }
+      .app-img {
+        width: 190px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- بنر هشدار امنیت -->
+  <div class="alert-banner">
+    <span class="alert-icon">⚠️</span>
+    <span>هشدار امنیتی: نسخه جدید و رسمی اپلیکیشن بام را تنها از طریق لینک‌های معتبر زیر دریافت نمایید.</span>
+  </div>
+
+  <div class="container">
+    <!-- عنوان و توضیحات -->
+    <h1 class="title">اپلیکیشن اندروید بام</h1>
+    <div class="subtitle">بانکداری دیجیتال بانک ملی ایران</div>
+
+    <div class="subtext">
+      بام فقط یک اینترنت‌بانک نیست، یک پلتفرم تمام‌عیار بانکداری دیجیتال است:
+      <span class="highlight">هوشمندتر، امن‌تر، سریع‌تر و همیشه همراه شما</span>
+    </div>
+
+    <!-- دکمه دانلود مستقیم -->
+    <a href="bam.apk" download class="btn-download-primary" onclick="showLoading()">
+      <svg viewBox="0 0 24 24">
+        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+      </svg>
+      <span>دانلود مستقیم اپلیکیشن بام</span>
+    </a>
+
+    <!-- وضعیت لودینگ دانلود -->
+    <div id="download-status" class="download-status">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+      <span>دانلود فایل آغاز شد (bam.apk)</span>
+    </div>
+
+    <!-- تصویر بنر برنامه -->
+    <div class="app-img-container">
+      <img src="assets/phone-banner.png" alt="اپلیکیشن بام" class="app-img">
+    </div>
+
+    <!-- دکمه‌های استور (بازار و مایکت که هر دو فایل bam.apk را دانلود می‌کنند) -->
+    <div class="stores-title">سایر روش‌های دریافت</div>
+    <div class="store-buttons">
+      <a href="bam.apk" download class="store-btn" onclick="showLoading()">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+        <span>دانلود از کافه بازار</span>
+      </a>
+
+      <a href="bam.apk" download class="store-btn" onclick="showLoading()">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+        <span>دانلود از مایکت</span>
+      </a>
+    </div>
+
+    <!-- بج امنیتی -->
+    <div class="security-badge">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+      </svg>
+      <span>نسخه اصلی و تایید شده توسط بانک ملی ایران</span>
+    </div>
+  </div>
+
+  <script>
+    function showLoading() {
+      const statusEl = document.getElementById("download-status");
+      if (statusEl) {
+        statusEl.classList.add("show");
+        // Scroll slightly if needed or keep visible
+      }
+    }
+  </script>
+
+</body>
+</html>
